@@ -3,8 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert New or Edit Customers</title>
+<script type = "text/javascript">
+   // Form validation code will come here.
+   function validate() {
+   
+      if(fullName.value == "" ) {
+         alert( "Please provide your name!" );
+         fullName.focus() ;
+         return false;
+      }
+      if(email.value == "" ) {
+         alert( "Please provide your Email!" );
+         email.focus() ;
+         return false;
+      }
+      
+      if(age.value == "" ) {
+          alert( "Please provide your age!" );
+          age.focus() ;
+          return false;
+       }
+      
+      if(address.street.value == "" ) {
+          alert( "Please provide your street!" );
+          address.street.focus() ;
+          return false;
+       }
+      
+      if(city.value == "" ) {
+          alert( "Please provide your city!" );
+          address.city.focus() ;
+          return false;
+       }
+
+      if(address.state.value == "" ) {
+         alert( "Please provide your state!" );
+         address.state.focus() ;
+         return false;
+      }
+      return( true );
+   }
+   
+	function cleanUp() {
+		document.querySelector("#fullName").style.borderColor = "revert";
+		document.querySelector("#email").style.borderColor = "revert";
+		document.querySelector("#age").style.borderColor = "revert";
+		document.querySelector("#address.street").style.borderColor = "revert";
+		document.querySelector("#address.city").style.borderColor = "revert";
+		document.querySelector("#address.state").style.borderColor = "revert";
+	}
+</script>
 </head>
 <body>
+
+
 <form th:object="${newCustomers}" th:action="@{/update/{id}(id=${newCustomers.id})}" method=POST>
 Name: <input name="fullName" size="20" th:field="*{fullName}"><br />
 Email: <input name="email" size="20" th:field="*{email}"><br />
@@ -13,7 +65,8 @@ Street: <input name="address.street" size="20" th:field="*{address.street}"><br 
 City: <input name="address.city" size="20" th:field="*{address.city}"><br />
 State: <input name="address.state" size="20" th:field="*{address.state}"><br />
 
-<input name="Submit" type="submit" value="submit" />
+	<input name="Submit" type="submit" value="submit" onclick="validate()" />
+	<input name="reset" type="reset" value="reset" onclick="cleanUp()">
 </form>
 <a href="../viewAll">View All Customers</a>
 
